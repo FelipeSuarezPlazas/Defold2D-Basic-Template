@@ -1,0 +1,23 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	self.btns = {}
+	self.btns["start"] = gui.get_node("start_btn")
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function on_message(self, message_id, message, sender)
+	
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released then
+		if gui.pick_node(self.btns["start"], action.x, action.y) then
+			print("switch menu")
+			switch(self, "world")
+		end
+	end
+end
